@@ -3,11 +3,11 @@ package main
 import (
 	"archive/zip"
 	"encoding/json"
-	"net/url"
 	"errors"
 	"fmt"
 	"io"
 	"log"
+	"net/url"
 	"os"
 	"regexp"
 	"strconv"
@@ -22,12 +22,12 @@ import (
 )
 
 type Configuration struct {
-	AccessKey          string
-	SecretKey          string
-	Bucket             string
-	Region             string
-	RedisUrl           string
-	Port               int
+	AccessKey string
+	SecretKey string
+	Bucket    string
+	Region    string
+	RedisUrl  string
+	Port      int
 }
 
 var config = Configuration{}
@@ -65,6 +65,7 @@ func main() {
 	InitRedis()
 
 	fmt.Println("Running on port", config.Port)
+	http.HandleFunc("/ping", ping)
 	http.HandleFunc("/", handler)
 	http.ListenAndServe(":"+strconv.Itoa(config.Port), nil)
 }
@@ -121,7 +122,7 @@ func InitRedis() {
 			if _, err := c.Do("AUTH", p); err != nil {
 				c.Close()
 				return nil, err
-			}			
+			}
 			return c, nil
 		},
 		TestOnBorrow: func(c redigo.Conn, t time.Time) (err error) {
@@ -173,6 +174,21 @@ func getFilesFromRedis(ref string) (files []*RedisFile, err error) {
 	parseFileDates(files)
 
 	return
+}
+
+func ping(w http.ResponseWriter, r *http.Request) {
+	redis := redisPool.Get()
+	defer redis.Close()
+
+	_, err := redis.Do("PING")
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/plain")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("."))
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
