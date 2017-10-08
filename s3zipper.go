@@ -19,6 +19,7 @@ import (
 	"github.com/AdRoll/goamz/aws"
 	"github.com/AdRoll/goamz/s3"
 	redigo "github.com/garyburd/redigo/redis"
+	"github.com/newrelic/go-agent"
 )
 
 type Configuration struct {
@@ -64,9 +65,15 @@ func main() {
 	initAwsBucket()
 	InitRedis()
 
+	cfg := newrelic.NewConfig(os.Getenv("NEW_RELIC_APP_NAME"), os.Getenv("NEW_RELIC_LICENSE_KEY"))
+	app, err := newrelic.NewApplication(cfg)
+	if err != nil {
+		panic(err)
+	}
+
 	fmt.Println("Running on port", config.Port)
-	http.HandleFunc("/ping", ping)
-	http.HandleFunc("/", handler)
+	http.HandleFunc(newrelic.WrapHandleFunc(app, "/ping", ping))
+	http.HandleFunc(newrelic.WrapHandleFunc(app, "/", handler))
 	http.ListenAndServe(":"+strconv.Itoa(config.Port), nil)
 }
 

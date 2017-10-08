@@ -25,6 +25,42 @@
 			"path": "github.com/garyburd/redigo/redis",
 			"revision": "b925df3cc15d8646e9b5b333ebaf3011385aba11",
 			"revisionTime": "2017-08-14T17:23:35Z"
+		},
+		{
+			"checksumSHA1": "fG/hdI57tzm9CfcELMa7QVXESR8=",
+			"path": "github.com/newrelic/go-agent",
+			"revision": "29ec3cd1bb2f21d21d36da37dae52695cb2c3a17",
+			"revisionTime": "2017-04-18T16:35:58Z"
+		},
+		{
+			"checksumSHA1": "xOBMYhyCFUIXslS7AWykIUY6dUk=",
+			"path": "github.com/newrelic/go-agent/internal",
+			"revision": "29ec3cd1bb2f21d21d36da37dae52695cb2c3a17",
+			"revisionTime": "2017-04-18T16:35:58Z"
+		},
+		{
+			"checksumSHA1": "mkbupMdy+cF7xyo8xW0A6Bq15k4=",
+			"path": "github.com/newrelic/go-agent/internal/jsonx",
+			"revision": "29ec3cd1bb2f21d21d36da37dae52695cb2c3a17",
+			"revisionTime": "2017-04-18T16:35:58Z"
+		},
+		{
+			"checksumSHA1": "ywxlVKtGArJ2vDfH1rAqEFwSGds=",
+			"path": "github.com/newrelic/go-agent/internal/logger",
+			"revision": "29ec3cd1bb2f21d21d36da37dae52695cb2c3a17",
+			"revisionTime": "2017-04-18T16:35:58Z"
+		},
+		{
+			"checksumSHA1": "S7CiHO7EblgZt9q7wgiXMv/j/ao=",
+			"path": "github.com/newrelic/go-agent/internal/sysinfo",
+			"revision": "29ec3cd1bb2f21d21d36da37dae52695cb2c3a17",
+			"revisionTime": "2017-04-18T16:35:58Z"
+		},
+		{
+			"checksumSHA1": "c2JSKesj3tHYgzIF3QL37WfHWG8=",
+			"path": "github.com/newrelic/go-agent/internal/utilization",
+			"revision": "29ec3cd1bb2f21d21d36da37dae52695cb2c3a17",
+			"revisionTime": "2017-04-18T16:35:58Z"
 		}
 	],
 	"rootPath": "s3zipper"
