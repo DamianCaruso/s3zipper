@@ -1,4 +1,5 @@
-conf.json
-s3zipper.exe
-s3zipper.log
-s3zipper
+/bin
+/.go
+/.push-*
+/.container-*
+/.dockerfile-*
